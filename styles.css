@@ -385,6 +385,29 @@ body {
     margin-top: 15px;
 }
 
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 15px 0 10px 0;
+}
+
+.product-rating .stars {
+    color: #f39c12;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.product-rating .rating-text {
+    color: #27ae60;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: rgba(39, 174, 96, 0.1);
+    padding: 4px 8px;
+    border-radius: 12px;
+    border: 1px solid rgba(39, 174, 96, 0.3);
+}
+
 /* 闂滄柤鎴戝€� */
 .about {
     padding: 100px 0;
@@ -879,6 +902,19 @@ body {
 
     .price {
         font-size: 1.2rem;
+    }
+
+    .product-rating {
+        margin: 12px 0 8px 0;
+    }
+
+    .product-rating .stars {
+        font-size: 1rem;
+    }
+
+    .product-rating .rating-text {
+        font-size: 0.8rem;
+        padding: 3px 6px;
     }
 
     .about {
