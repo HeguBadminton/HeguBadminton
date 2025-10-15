@@ -5,8 +5,9 @@ function initCarousel() {
     // 獲取所有需要的元素
     const slides = document.querySelectorAll('.carousel-slide');
     const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
+    const indicators = document.querySelectorAll('.indicator');
+    const prevBtn = document.querySelector('.prev-btn') || document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.next-btn') || document.querySelector('.carousel-next');
     const carousel = document.querySelector('.carousel-container');
     
     console.log('找到的元素:', {
@@ -41,6 +42,11 @@ function initCarousel() {
             dot.classList.remove('active');
         });
         
+        // 移除所有指示器的活動狀態
+        indicators.forEach(indicator => {
+            indicator.classList.remove('active');
+        });
+        
         // 顯示當前頁面
         if (slides[index]) {
             slides[index].classList.add('active');
@@ -49,6 +55,11 @@ function initCarousel() {
         // 設置圓點活動狀態
         if (dots[index]) {
             dots[index].classList.add('active');
+        }
+        
+        // 設置指示器活動狀態
+        if (indicators[index]) {
+            indicators[index].classList.add('active');
         }
         
         currentSlide = index;
@@ -85,6 +96,14 @@ function initCarousel() {
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
             console.log(`點擊圓點 ${index}`);
+            showSlide(index);
+        });
+    });
+    
+    // 綁定指示器事件
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            console.log(`點擊指示器 ${index}`);
             showSlide(index);
         });
     });
@@ -551,7 +570,17 @@ const reviewTemplates = {
         '從新手到現在，這支球拍陪伴我成長，值得推薦！',
         '手感舒適，擊球穩定，專業級的品質無話可說。',
         '殺球威力驚人，對手都說我的球速變快了！',
-        '性價比超高，這價位能買到這種品質真的很棒！'
+        '性價比超高，這價位能買到這種品質真的很棒！',
+        '球拍平衡點設計完美，揮拍很順手。',
+        '網前小球處理細膩，後場殺球有力，全能表現。',
+        '朋友推薦買的，用了兩個月非常滿意！',
+        '比我之前的球拍好太多了，進步很明顯。',
+        '做工精緻，質感一流，收到就愛不釋手。',
+        '打了幾次球，手腕不會痠，減震效果很好。',
+        '這個價位買到這種品質，老闆真的佛心！',
+        '包裝很仔細，收到球拍沒有任何損傷。',
+        '客服很專業，幫我推薦了最適合的球拍。',
+        '已經推薦給球友了，大家都說很棒！'
     ],
     'archery': [
         '弓箭系列經典之作，平衡感極佳，適合各種打法。',
@@ -563,7 +592,17 @@ const reviewTemplates = {
         '經典款就是經典款，永遠不會過時！',
         '擊球手感柔軟舒適，長時間使用也不累。',
         '價格合理，品質優秀，性價比很高。',
-        '從業餘到專業都能駕馭，萬能型球拍！'
+        '從業餘到專業都能駕馭，萬能型球拍！',
+        '買給老婆的，她說很好用！',
+        '這支球拍陪我打了好多場比賽，很耐用。',
+        '教練推薦的，果然沒讓我失望。',
+        '平衡點抓得很準，打起來很順。',
+        '新手友好，進步速度很快！',
+        '球友看到都想買同款。',
+        '經典就是經典，百搭球拍！',
+        '包裝完整，品質有保證。',
+        '用了三個月，越用越喜歡！',
+        '全家人都在用這款，好評！'
     ],
     '100zz': [
         '100ZZ世界冠軍同款！殺球威力真的超強！',
@@ -663,33 +702,92 @@ const reviewTemplates = {
     ]
 };
 
+// 動態生成不重複名字
+function generateUniqueName() {
+    const surnames = [
+        '王', '李', '張', '陳', '林', '黃', '吳', '鄭', '蔡', '許', '周', '謝', '楊', '劉', '曾', '彭',
+        '蘇', '何', '羅', '葉', '江', '馬', '高', '徐', '梁', '宋', '方', '鄧', '唐', '范', '石', '薛',
+        '呂', '柯', '孫', '莊', '田', '洪', '白', '盧', '廖', '鍾', '游', '簡', '胡', '魏', '潘', '邱',
+        '郭', '趙', '錢', '沈', '韓', '馮', '朱', '秦', '尤', '施', '孔', '曹', '嚴', '華', '金', '陶',
+        '姜', '戚', '鄒', '喻', '柏', '水', '竇', '章', '雲', '葛', '奚', '郎', '魯', '韋', '昌', '苗',
+        '鳳', '花', '俞', '任', '袁', '柳', '鮑', '史', '費', '廉', '岑', '雷', '賀', '倪', '湯', '滕',
+        '殷', '畢', '郝', '鄔', '安', '常', '樂', '于', '時', '傅', '皮', '卞', '齊', '康', '伍', '余'
+    ];
+    
+    const maleNames = [
+        '志明', '志強', '建國', '家豪', '志偉', '建民', '俊傑', '冠宇', '宗翰', '承恩',
+        '柏翰', '宇軒', '子軒', '冠霖', '彥廷', '睿翔', '承翰', '哲宇', '俊賢', '皓宇',
+        '宇恩', '奕翔', '宥辰', '睿恩', '承佑', '柏宇', '聖恩', '奕宏', '政霖', '致遠',
+        '宇翔', '峻瑋', '柏勳', '宥翔', '睿哲', '奕成', '翔宇', '浩然', '子豪', '俊宏',
+        '宇辰', '冠廷', '彥霖', '承宇', '柏睿', '宗佑', '奕霖', '政宇', '致豪', '宇傑',
+        '峻宏', '柏安', '宥宇', '睿宏', '奕辰', '翔恩', '浩宇', '子翔', '俊廷', '宇霖',
+        '冠豪', '彥宇', '承霖', '柏辰', '宗恩', '奕宇', '政翔', '致恩', '宇豪', '峻霖'
+    ];
+    
+    const femaleNames = [
+        '雅婷', '淑惠', '美玲', '雅雯', '淑芬', '小華', '美惠', '雅芬', '怡君', '佳穎',
+        '宜庭', '心怡', '欣怡', '筱婷', '雅筑', '詩涵', '佳蓉', '婉婷', '家綺', '思妤',
+        '宜蓁', '昕妤', '雨彤', '品妍', '芷瑄', '語晴', '依婷', '馨儀', '筱涵', '詩婷',
+        '依萱', '心慈', '宜珊', '雅琪', '筱雯', '佳慧', '宜靜', '思穎', '欣穎', '雅涵',
+        '怡萱', '靜怡', '宜芳', '雅惠', '詩雅', '欣妤', '佳玲', '品萱', '馨予', '筱筑',
+        '雨萱', '心妤', '欣彤', '品妤', '芷萱', '語彤', '依彤', '馨蕾', '筱彤', '詩筑',
+        '依晴', '心彤', '宜萱', '雅彤', '筱萱', '佳萱', '宜彤', '思彤', '欣萱', '雅萱'
+    ];
+    
+    const surname = surnames[Math.floor(Math.random() * surnames.length)];
+    const isMale = Math.random() > 0.5;
+    const givenName = isMale 
+        ? maleNames[Math.floor(Math.random() * maleNames.length)]
+        : femaleNames[Math.floor(Math.random() * femaleNames.length)];
+    
+    return surname + givenName;
+}
+
+// 台灣地點數據
+const taiwanLocations = [
+    '台北', '新北', '台南', '高雄', '台中', '桃園', '新竹', '花蓮', '台東', '屏東', '嘉義'
+];
+
 // 生成隨機好評
-function generateRandomReviews(productId, count = 150) {
+function generateRandomReviews(productId, count = 3500) {
     const reviews = [];
     const templates = reviewTemplates[productId] || reviewTemplates['archery-11-pro'];
     
     for (let i = 0; i < count; i++) {
-        const userName = userNames[Math.floor(Math.random() * userNames.length)];
+        const userName = generateUniqueName();
         const userAvatar = userAvatars[Math.floor(Math.random() * userAvatars.length)];
         const template = templates[Math.floor(Math.random() * templates.length)];
+        const location = taiwanLocations[Math.floor(Math.random() * taiwanLocations.length)];
         
-        // 添加一些變化
+        // 添加更多自然的變化
         const variations = [
             '', '真的很推薦！', '品質超棒！', '值得購買！', '非常滿意！', 
-            '手感很好！', '攻擊力驚人！', '性價比很高！', '專業級品質！', '值得信賴！'
+            '手感很好！', '攻擊力驚人！', '性價比很高！', '專業級品質！', '值得信賴！',
+            '用了一個月，感覺超棒！', '朋友也想買同款。', '已經回購第二支了。',
+            '比預期的還要好！', '五星好評不解釋！', '會繼續支持！', '超級推薦！',
+            '打球更有信心了。', '技術提升很多！', '物超所值！', '完全沒後悔！',
+            '配送很快，服務很好。', '老闆人很nice！', '下次還會再買。', '已加Line收藏！',
+            '球友都問我在哪買的。', '這個價格太划算了！', '用起來很順手。', '減震效果讚！'
         ];
         
         const variation = variations[Math.floor(Math.random() * variations.length)];
-        const reviewText = template + variation;
+        const reviewText = template + (variation ? ' ' + variation : '');
         
-        // 隨機評分 (4-5星)
-        const rating = Math.random() > 0.1 ? 5 : 4;
+        // 高評分分布 (99% 5星, 1% 4星)
+        let rating;
+        const random = Math.random();
+        if (random < 0.99) {
+            rating = 5;
+        } else {
+            rating = 4;
+        }
         
         reviews.push({
             userName,
             userAvatar,
             reviewText,
             rating,
+            location,
             date: generateRandomDate()
         });
     }
@@ -697,26 +795,26 @@ function generateRandomReviews(productId, count = 150) {
     return reviews;
 }
 
-// 生成隨機日期 (最近6個月內)
+// 生成隨機日期 (最近1年內)
 function generateRandomDate() {
     const now = new Date();
-    const sixMonthsAgo = new Date(now.getTime() - (6 * 30 * 24 * 60 * 60 * 1000));
-    const randomTime = sixMonthsAgo.getTime() + Math.random() * (now.getTime() - sixMonthsAgo.getTime());
+    const oneYearAgo = new Date(now.getTime() - (365 * 24 * 60 * 60 * 1000));
+    const randomTime = oneYearAgo.getTime() + Math.random() * (now.getTime() - oneYearAgo.getTime());
     return new Date(randomTime);
 }
 
-// 產品好評數據
+// 產品好評數據 - 大量真實感評論
 const productReviews = {
-    'archery-11-pro': generateRandomReviews('archery-11-pro', 180),
-    'archery': generateRandomReviews('archery', 165),
-    '100zz': generateRandomReviews('100zz', 195),
-    '1000z': generateRandomReviews('1000z', 175),
-    '99-pro': generateRandomReviews('99-pro', 170),
-    'wind-blade': generateRandomReviews('wind-blade', 160),
-    '77-pro': generateRandomReviews('77-pro', 155),
-    'vtzf2': generateRandomReviews('vtzf2', 185),
-    '800-pro': generateRandomReviews('800-pro', 145),
-    '99': generateRandomReviews('99', 165)
+    'archery-11-pro': generateRandomReviews('archery-11-pro', 4580),
+    'archery': generateRandomReviews('archery', 3920),
+    '100zz': generateRandomReviews('100zz', 4850),
+    '1000z': generateRandomReviews('1000z', 4320),
+    '99-pro': generateRandomReviews('99-pro', 3680),
+    'wind-blade': generateRandomReviews('wind-blade', 3450),
+    '77-pro': generateRandomReviews('77-pro', 3180),
+    'vtzf2': generateRandomReviews('vtzf2', 4120),
+    '800-pro': generateRandomReviews('800-pro', 3050),
+    '99': generateRandomReviews('99', 3890)
 };
 
 // 加入購物車
@@ -743,8 +841,17 @@ function updateCartCount() {
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     const cartCount = document.querySelector('.cart-count');
     if (cartCount) {
+        const oldCount = parseInt(cartCount.textContent) || 0;
         cartCount.textContent = totalItems;
         cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+        
+        // 如果數量增加，觸發動畫
+        if (totalItems > oldCount) {
+            cartCount.style.animation = 'none';
+            setTimeout(() => {
+                cartCount.style.animation = 'bounceIn 0.5s ease';
+            }, 10);
+        }
     }
 }
 
@@ -843,25 +950,46 @@ function checkout() {
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const itemList = cart.map(item => `${item.name} x${item.quantity}`).join('\n');
     
-    // 這裡可以整合實際的支付系統
-    const message = `感謝您的購買！\n\n商品清單：\n${itemList}\n\n總計：NT$ ${total.toLocaleString()}\n\n請聯繫我們完成付款：\nLine: spring.moonbeam\nFacebook: 河谷羽球`;
+    // 生成訂單訊息
+    const message = `您好！我想訂購以下商品：\n\n${itemList}\n\n總計：NT$ ${total.toLocaleString()}\n\n請問如何完成付款？謝謝！`;
     
-    // 複製到剪貼板
+    // 複製到剪貼板並跳轉到Facebook
     if (navigator.clipboard) {
         navigator.clipboard.writeText(message).then(() => {
-            showNotification('訂單資訊已複製到剪貼板！請聯繫我們完成付款。', 'success');
-            // 跳轉到facebook並發送剪貼板上的訊息
-            window.open('https://www.facebook.com/messages/t/332812596593087', '_blank');
+            showNotification('訂單已複製！即將前往Facebook Messenger...', 'success');
             
+            // 1.5秒後跳轉到Facebook Messenger
+            setTimeout(() => {
+                // 使用Facebook頁面ID直接開啟Messenger
+                //window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
+                // 發送facebook message
+                window.open('https://www.facebook.com/messages/t/332812596593087', '_blank');
+                
+                // 清空購物車
+                cart = [];
+                updateCartUI();
+                toggleCart();
+            }, 1500);
+        }).catch(() => {
+            // 複製失敗也跳轉
+            showNotification('即將前往Facebook完成訂購...', 'info');
+            setTimeout(() => {
+                window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
+                cart = [];
+                updateCartUI();
+                toggleCart();
+            }, 1000);
         });
     } else {
-        showNotification(`總計：NT$ ${total.toLocaleString()}，請聯繫我們完成付款！`, 'success');
+        // 不支援剪貼板直接跳轉
+        showNotification('即將前往Facebook完成訂購...', 'info');
+        setTimeout(() => {
+            window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }, 1000);
     }
-    
-    // 清空購物車
-    cart = [];
-    updateCartUI();
-    toggleCart();
 }
 
 // 初始化好評顯示
@@ -896,7 +1024,10 @@ function displayProductReviews(productId) {
                 <div class="review-header">
                     <div class="review-user">
                         <span class="user-avatar">${review.userAvatar}</span>
-                        <span class="user-name">${review.userName}</span>
+                        <div class="user-info">
+                            <span class="user-name">${review.userName}</span>
+                            <span class="user-location"><i class="fas fa-map-marker-alt"></i> ${review.location}</span>
+                        </div>
                     </div>
                     <div class="review-rating">
                         ${generateStars(review.rating)}
@@ -996,12 +1127,17 @@ function showAllReviews(productId) {
                             <div class="review-header">
                                 <div class="review-user">
                                     <span class="user-avatar">${review.userAvatar}</span>
-                                    <span class="user-name">${review.userName}</span>
+                                    <div class="user-info">
+                                        <span class="user-name">${review.userName}</span>
+                                        <span class="user-location"><i class="fas fa-map-marker-alt"></i> ${review.location}</span>
+                                    </div>
                                 </div>
-                                <div class="review-rating">
-                                    ${generateStars(review.rating)}
+                                <div class="review-meta">
+                                    <div class="review-rating">
+                                        ${generateStars(review.rating)}
+                                    </div>
+                                    <div class="review-date">${formatDate(review.date)}</div>
                                 </div>
-                                <div class="review-date">${formatDate(review.date)}</div>
                             </div>
                             <div class="review-text">${review.reviewText}</div>
                         </div>
@@ -1046,6 +1182,50 @@ function closeReviewsModal() {
         }, 300);
     }
 }
+
+// 圖片燈箱功能
+function openLightbox(imageSrc, caption) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    
+    if (lightbox && lightboxImage && lightboxCaption) {
+        lightboxImage.src = imageSrc;
+        lightboxCaption.textContent = caption;
+        lightbox.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        lightbox.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+}
+
+// ESC鍵關閉燈箱
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
+});
+
+// 滾動進度條
+function updateScrollProgress() {
+    const scrollProgress = document.getElementById('scrollProgress');
+    if (!scrollProgress) return;
+    
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercentage = (scrollTop / scrollHeight) * 100;
+    
+    scrollProgress.style.width = scrollPercentage + '%';
+}
+
+window.addEventListener('scroll', updateScrollProgress);
+window.addEventListener('load', updateScrollProgress);
 
 // 產品搜尋功能（未來擴展）
 function initializeSearch() {
