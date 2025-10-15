@@ -989,7 +989,7 @@ function toggleCart() {
     }
 }
 
-// 結帳功能 - Facebook Messenger整合
+// 結帳功能 - Facebook整合
 function checkout() {
     if (cart.length === 0) {
         showNotification('購物車是空的', 'error');
@@ -1002,57 +1002,44 @@ function checkout() {
     // 生成訂單訊息（更友好的格式）
     const message = `🏸 河谷羽球訂購單\n\n📋 商品清單：\n${itemList}\n\n💰 總計：NT$ ${total.toLocaleString()}\n\n請問如何完成付款？謝謝！`;
     
-    // 使用Facebook Messenger URL scheme（如果在手機上）
-    //const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    //const facebookUrl = isMobile 
-        ? 'https://www.facebook.com/profile.php?id=61563995139034' // 手機App
-        : 'https://www.facebook.com/profile.php?id=61563995139034'; // 網頁版Messenger
+    // Facebook頁面URL
+    const facebookPageUrl = 'https://www.facebook.com/profile.php?id=61563995139034';
     
     // 複製訂單到剪貼板
     if (navigator.clipboard) {
         navigator.clipboard.writeText(message).then(() => {
-            showNotification('✅ 訂單已複製！即將開啟Facebook Messenger...', 'success');
+            showNotification('✅ 訂單已複製！即將開啟Facebook...', 'success');
             
             setTimeout(() => {
-                // 嘗試開啟Messenger
-                //const messengerWindow = window.open(facebookUrl, '_blank');
-                
-                // 如果Messenger無法開啟，則開啟Facebook頁面
-                setTimeout(() => {
-                    if (!messengerWindow || messengerWindow.closed) {
-                        //window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
-                    }
-                }, 500);
+                // 直接開啟Facebook頁面
+                window.location.href = facebookPageUrl;
                 
                 // 清空購物車
-                cart = [];
-                updateCartUI();
-                toggleCart();
+                setTimeout(() => {
+                    cart = [];
+                    updateCartUI();
+                }, 500);
             }, 1500);
         }).catch(() => {
             // 複製失敗也跳轉
             showNotification('即將前往Facebook完成訂購...', 'info');
             setTimeout(() => {
-                //window.open(facebookUrl, '_blank');
+                window.location.href = facebookPageUrl;
                 setTimeout(() => {
-                    //window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
+                    cart = [];
+                    updateCartUI();
                 }, 500);
-                cart = [];
-                updateCartUI();
-                toggleCart();
             }, 1000);
         });
     } else {
         // 不支援剪貼板直接跳轉
         showNotification('即將前往Facebook完成訂購...', 'info');
         setTimeout(() => {
-            //window.open(facebookUrl, '_blank');
+            window.location.href = facebookPageUrl;
             setTimeout(() => {
-                //window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
+                cart = [];
+                updateCartUI();
             }, 500);
-            cart = [];
-            updateCartUI();
-            toggleCart();
         }, 1000);
     }
 }
