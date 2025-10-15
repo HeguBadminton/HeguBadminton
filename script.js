@@ -1010,37 +1010,36 @@ function checkout() {
         navigator.clipboard.writeText(message).then(() => {
             showNotification('✅ 訂單已複製！即將開啟Facebook...', 'success');
             
-            setTimeout(() => {
+           
                 // 直接開啟Facebook頁面
                 window.location.href = facebookPageUrl;
                 
-                // 清空購物車
-                setTimeout(() => {
+               
                     cart = [];
                     updateCartUI();
-                }, 500);
-            }, 1500);
+                
+           
         }).catch(() => {
             // 複製失敗也跳轉
             showNotification('即將前往Facebook完成訂購...', 'info');
-            setTimeout(() => {
+            
                 window.location.href = facebookPageUrl;
-                setTimeout(() => {
+                
                     cart = [];
                     updateCartUI();
-                }, 500);
-            }, 1000);
+               
+           
         });
     } else {
         // 不支援剪貼板直接跳轉
         showNotification('即將前往Facebook完成訂購...', 'info');
-        setTimeout(() => {
+        
             window.location.href = facebookPageUrl;
-            setTimeout(() => {
+          
                 cart = [];
                 updateCartUI();
-            }, 500);
-        }, 1000);
+         
+      
     }
 }
 
