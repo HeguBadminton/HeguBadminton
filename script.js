@@ -748,6 +748,67 @@ const taiwanLocations = [
     '台北', '新北', '台南', '高雄', '台中', '桃園', '新竹', '花蓮', '台東', '屏東', '嘉義'
 ];
 
+// 生成自然多樣的評論文字
+function generateNaturalReviewText(productName) {
+    const openings = [
+        '剛收到就試打了', '用了兩週', '使用一個月心得', '第二次購買', '朋友推薦',
+        '看評價決定買', '試打後下單', '教練建議', '球友介紹', '升級裝備',
+        '終於換拍了', '比賽用過', '社團推薦', '體驗後購買', '回購第二支',
+        '收到貨很驚喜', '打了幾場球', '週末試打', '用了快三個月', '半年使用心得'
+    ];
+    
+    const performance = [
+        '殺球威力驚人', '控球精準提升', '攻守轉換流暢', '網前處理細膩', '後場推球輕鬆',
+        '平抽擋速度快', '連續進攻省力', '防守反擊犀利', '甜區夠大', '擊球穩定',
+        '力量傳導好', '揮拍速度快', '殺球角度刁鑽', '接殺穩定', '過渡球舒服',
+        '搓球旋轉足', '吊球落點準', '高遠球深度夠', '平高球快速', '撲球反應快'
+    ];
+    
+    const feeling = [
+        '手感超棒', '握感舒適', '重量適中', '平衡點好', '震動小', '不累手',
+        '拍框彈性佳', '線床回彈快', '揮起來順', '擊球聲清脆', '質感一流',
+        '做工精緻', '握把粗細剛好', '重心穩定', '手柄防滑', '整體輕盈'
+    ];
+    
+    const results = [
+        '技術進步快', '比賽成績變好', '隊友都誇', '球友想買', '升級成功',
+        '贏球率提高', '自信心增加', '更愛打球', '成為主力', '已推薦朋友',
+        '準備回購', '打算收藏', '進步明顯', '實力提升', '戰績變好'
+    ];
+    
+    const service = [
+        '配送快', '包裝仔細', '客服專業', '售後好', '回覆快', '諮詢詳細',
+        '出貨迅速', '品質保證', '服務親切', '老闆nice'
+    ];
+    
+    const conclusions = [
+        '非常推薦', '值得購買', '五星好評', '物超所值', '不後悔', '大力推薦',
+        '絕對回購', '超級滿意', '買到賺到', '強烈推薦', '必買', '讚啦', '超讚',
+        '太棒了', '完美', '沒話說', '真心推', '必入手', '神器', '愛了'
+    ];
+    
+    // 隨機選擇2-4個部分
+    const parts = [];
+    
+    if (Math.random() > 0.3) parts.push(openings[Math.floor(Math.random() * openings.length)]);
+    parts.push(performance[Math.floor(Math.random() * performance.length)]);
+    if (Math.random() > 0.4) parts.push(feeling[Math.floor(Math.random() * feeling.length)]);
+    if (Math.random() > 0.5) parts.push(results[Math.floor(Math.random() * results.length)]);
+    if (Math.random() > 0.7) parts.push(service[Math.floor(Math.random() * service.length)]);
+    
+    // 連接詞變化
+    const connectors = ['，', '。', '！', '，而且', '，另外', '。特別是', '，尤其'];
+    let review = parts[0];
+    
+    for (let i = 1; i < parts.length; i++) {
+        review += connectors[Math.floor(Math.random() * connectors.length)] + parts[i];
+    }
+    
+    review += '！' + conclusions[Math.floor(Math.random() * conclusions.length)] + '！';
+    
+    return review;
+}
+
 // 生成隨機好評
 function generateRandomReviews(productId, count = 3500) {
     const reviews = [];
@@ -756,22 +817,10 @@ function generateRandomReviews(productId, count = 3500) {
     for (let i = 0; i < count; i++) {
         const userName = generateUniqueName();
         const userAvatar = userAvatars[Math.floor(Math.random() * userAvatars.length)];
-        const template = templates[Math.floor(Math.random() * templates.length)];
         const location = taiwanLocations[Math.floor(Math.random() * taiwanLocations.length)];
         
-        // 添加更多自然的變化
-        const variations = [
-            '', '真的很推薦！', '品質超棒！', '值得購買！', '非常滿意！', 
-            '手感很好！', '攻擊力驚人！', '性價比很高！', '專業級品質！', '值得信賴！',
-            '用了一個月，感覺超棒！', '朋友也想買同款。', '已經回購第二支了。',
-            '比預期的還要好！', '五星好評不解釋！', '會繼續支持！', '超級推薦！',
-            '打球更有信心了。', '技術提升很多！', '物超所值！', '完全沒後悔！',
-            '配送很快，服務很好。', '老闆人很nice！', '下次還會再買。', '已加Line收藏！',
-            '球友都問我在哪買的。', '這個價格太划算了！', '用起來很順手。', '減震效果讚！'
-        ];
-        
-        const variation = variations[Math.floor(Math.random() * variations.length)];
-        const reviewText = template + (variation ? ' ' + variation : '');
+        // 使用自然文字生成函數
+        const reviewText = generateNaturalReviewText(productId);
         
         // 高評分分布 (99% 5星, 1% 4星)
         let rating;
@@ -940,7 +989,7 @@ function toggleCart() {
     }
 }
 
-// 結帳功能
+// 結帳功能 - Facebook Messenger整合
 function checkout() {
     if (cart.length === 0) {
         showNotification('購物車是空的', 'error');
@@ -950,20 +999,30 @@ function checkout() {
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const itemList = cart.map(item => `${item.name} x${item.quantity}`).join('\n');
     
-    // 生成訂單訊息
-    const message = `您好！我想訂購以下商品：\n\n${itemList}\n\n總計：NT$ ${total.toLocaleString()}\n\n請問如何完成付款？謝謝！`;
+    // 生成訂單訊息（更友好的格式）
+    const message = `🏸 河谷羽球訂購單\n\n📋 商品清單：\n${itemList}\n\n💰 總計：NT$ ${total.toLocaleString()}\n\n請問如何完成付款？謝謝！`;
     
-    // 複製到剪貼板並跳轉到Facebook
+    // 使用Facebook Messenger URL scheme（如果在手機上）
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const facebookUrl = isMobile 
+        ? 'https://www.facebook.com/messages/t/332812596593087' // 手機App
+        : 'https://www.facebook.com/messages/t/332812596593087'; // 網頁版Messenger
+    
+    // 複製訂單到剪貼板
     if (navigator.clipboard) {
         navigator.clipboard.writeText(message).then(() => {
-            showNotification('訂單已複製！即將前往Facebook Messenger...', 'success');
+            showNotification('✅ 訂單已複製！即將開啟Facebook Messenger...', 'success');
             
-            // 1.5秒後跳轉到Facebook Messenger
             setTimeout(() => {
-                // 使用Facebook頁面ID直接開啟Messenger
-                //window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
-                // 發送facebook message
-                window.open('https://www.facebook.com/messages/t/332812596593087', '_blank');
+                // 嘗試開啟Messenger
+                const messengerWindow = window.open(facebookUrl, '_blank');
+                
+                // 如果Messenger無法開啟，則開啟Facebook頁面
+                setTimeout(() => {
+                    if (!messengerWindow || messengerWindow.closed) {
+                        window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
+                    }
+                }, 500);
                 
                 // 清空購物車
                 cart = [];
@@ -974,7 +1033,10 @@ function checkout() {
             // 複製失敗也跳轉
             showNotification('即將前往Facebook完成訂購...', 'info');
             setTimeout(() => {
-                window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
+                window.open(facebookUrl, '_blank');
+                setTimeout(() => {
+                    window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
+                }, 500);
                 cart = [];
                 updateCartUI();
                 toggleCart();
@@ -984,7 +1046,10 @@ function checkout() {
         // 不支援剪貼板直接跳轉
         showNotification('即將前往Facebook完成訂購...', 'info');
         setTimeout(() => {
-            window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
+            window.open(facebookUrl, '_blank');
+            setTimeout(() => {
+                window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
+            }, 500);
             cart = [];
             updateCartUI();
             toggleCart();
