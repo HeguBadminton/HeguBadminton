@@ -32,6 +32,10 @@
                     <a href="#contact" class="nav-link">聯絡我們</a>
                 </li>
             </ul>
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
             <div class="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -128,7 +132,7 @@
             <h2>高階球拍框型</h2>
             <p class="section-subtitle">專業級羽球拍，為您提供最頂級的擊球體驗</p>
             <div class="product-grid">
-                <div class="product-card">
+                <div class="product-card" data-product="archery-11-pro" data-price="1600">
                     <div class="product-image">
                         <i class="fas fa-table-tennis"></i>
                     </div>
@@ -138,10 +142,17 @@
                         <span class="stars">★★★★★</span>
                         <span class="rating-text">專業選手推薦</span>
                     </div>
+                    <div class="product-reviews" id="reviews-archery-11-pro">
+                        <!-- 好評將在這裡動態載入 -->
+                    </div>
                     <span class="racket-type">全能型</span>
-                    <span class="price">NT$ 8,500</span>
+                    <span class="price">NT$ 1,600（兩隻）</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('archery-11-pro', '弓箭11 Pro 框型', 1600)">
+                        <i class="fas fa-shopping-cart"></i>
+                        加入購物車
+                    </button>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-product="archery" data-price="1600">
                     <div class="product-image">
                         <i class="fas fa-table-tennis"></i>
                     </div>
@@ -151,10 +162,17 @@
                         <span class="stars">★★★★★</span>
                         <span class="rating-text">新手到高手都愛</span>
                     </div>
+                    <div class="product-reviews" id="reviews-archery">
+                        <!-- 好評將在這裡動態載入 -->
+                    </div>
                     <span class="racket-type">平衡型</span>
-                    <span class="price">NT$ 7,200</span>
+                    <span class="price">NT$ 1,600（兩隻）</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('archery', '弓箭框型', 1600)">
+                        <i class="fas fa-shopping-cart"></i>
+                        加入購物車
+                    </button>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-product="100zz" data-price="1600">
                     <div class="product-image">
                         <i class="fas fa-table-tennis"></i>
                     </div>
@@ -164,10 +182,17 @@
                         <span class="stars">★★★★★</span>
                         <span class="rating-text">世界冠軍同款</span>
                     </div>
+                    <div class="product-reviews" id="reviews-100zz">
+                        <!-- 好評將在這裡動態載入 -->
+                    </div>
                     <span class="racket-type">進攻型</span>
-                    <span class="price">NT$ 9,800</span>
+                    <span class="price">NT$ 1,600（兩隻）</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('100zz', '100ZZ 框型', 1600)">
+                        <i class="fas fa-shopping-cart"></i>
+                        加入購物車
+                    </button>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-product="1000z" data-price="1600">
                     <div class="product-image">
                         <i class="fas fa-table-tennis"></i>
                     </div>
@@ -177,10 +202,17 @@
                         <span class="stars">★★★★★</span>
                         <span class="rating-text">速度型選手首選</span>
                     </div>
+                    <div class="product-reviews" id="reviews-1000z">
+                        <!-- 好評將在這裡動態載入 -->
+                    </div>
                     <span class="racket-type">進攻型</span>
-                    <span class="price">NT$ 8,900</span>
+                    <span class="price">NT$ 1,600（兩隻）</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('1000z', '1000Z 框型', 1600)">
+                        <i class="fas fa-shopping-cart"></i>
+                        加入購物車
+                    </button>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-product="99-pro" data-price="1600">
                     <div class="product-image">
                         <i class="fas fa-table-tennis"></i>
                     </div>
@@ -190,10 +222,17 @@
                         <span class="stars">★★★★★</span>
                         <span class="rating-text">重砲手最愛</span>
                     </div>
+                    <div class="product-reviews" id="reviews-99-pro">
+                        <!-- 好評將在這裡動態載入 -->
+                    </div>
                     <span class="racket-type">進攻型</span>
-                    <span class="price">NT$ 8,200</span>
+                    <span class="price">NT$ 1,600（兩隻）</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('99-pro', '99 Pro 框型', 1600)">
+                        <i class="fas fa-shopping-cart"></i>
+                        加入購物車
+                    </button>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-product="wind-blade" data-price="1600">
                     <div class="product-image">
                         <i class="fas fa-table-tennis"></i>
                     </div>
@@ -203,10 +242,17 @@
                         <span class="stars">★★★★★</span>
                         <span class="rating-text">進攻利器</span>
                     </div>
+                    <div class="product-reviews" id="reviews-wind-blade">
+                        <!-- 好評將在這裡動態載入 -->
+                    </div>
                     <span class="racket-type">攻擊型</span>
-                    <span class="price">NT$ 7,800</span>
+                    <span class="price">NT$ 1,600（兩隻）</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('wind-blade', '風刃框型', 1600)">
+                        <i class="fas fa-shopping-cart"></i>
+                        加入購物車
+                    </button>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-product="77-pro" data-price="1600">
                     <div class="product-image">
                         <i class="fas fa-table-tennis"></i>
                     </div>
@@ -216,10 +262,17 @@
                         <span class="stars">★★★★★</span>
                         <span class="rating-text">攻守自如</span>
                     </div>
+                    <div class="product-reviews" id="reviews-77-pro">
+                        <!-- 好評將在這裡動態載入 -->
+                    </div>
                     <span class="racket-type">全能型</span>
-                    <span class="price">NT$ 7,500</span>
+                    <span class="price">NT$ 1,600（兩隻）</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('77-pro', '77 Pro 框型', 1600)">
+                        <i class="fas fa-shopping-cart"></i>
+                        加入購物車
+                    </button>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-product="vtzf2" data-price="1600">
                     <div class="product-image">
                         <i class="fas fa-table-tennis"></i>
                     </div>
@@ -229,10 +282,17 @@
                         <span class="stars">★★★★★</span>
                         <span class="rating-text">傳奇重頭設計</span>
                     </div>
+                    <div class="product-reviews" id="reviews-vtzf2">
+                        <!-- 好評將在這裡動態載入 -->
+                    </div>
                     <span class="racket-type">進攻型</span>
-                    <span class="price">NT$ 8,000</span>
+                    <span class="price">NT$ 1,600（兩隻）</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('vtzf2', 'VTZF2 框型', 1600)">
+                        <i class="fas fa-shopping-cart"></i>
+                        加入購物車
+                    </button>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-product="800-pro" data-price="1600">
                     <div class="product-image">
                         <i class="fas fa-table-tennis"></i>
                     </div>
@@ -242,10 +302,17 @@
                         <span class="stars">★★★★★</span>
                         <span class="rating-text">性價比之王</span>
                     </div>
+                    <div class="product-reviews" id="reviews-800-pro">
+                        <!-- 好評將在這裡動態載入 -->
+                    </div>
                     <span class="racket-type">攻擊型</span>
-                    <span class="price">NT$ 7,600</span>
+                    <span class="price">NT$ 1,600（兩隻）</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('800-pro', '800 Pro 框型', 1600)">
+                        <i class="fas fa-shopping-cart"></i>
+                        加入購物車
+                    </button>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-product="99" data-price="1600">
                     <div class="product-image">
                         <i class="fas fa-table-tennis"></i>
                     </div>
@@ -255,8 +322,15 @@
                         <span class="stars">★★★★★</span>
                         <span class="rating-text">重砲手終極武器</span>
                     </div>
+                    <div class="product-reviews" id="reviews-99">
+                        <!-- 好評將在這裡動態載入 -->
+                    </div>
                     <span class="racket-type">進攻型</span>
-                    <span class="price">NT$ 7,900</span>
+                    <span class="price">NT$ 1,600（兩隻）</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('99', '99 框型', 1600)">
+                        <i class="fas fa-shopping-cart"></i>
+                        加入購物車
+                    </button>
                 </div>
             </div>
         </div>
@@ -295,48 +369,90 @@
     <section id="contact" class="contact">
         <div class="container">
             <h2>聯絡我們</h2>
+            <p class="contact-subtitle">歡迎隨時與我們聯繫，我們將竭誠為您服務</p>
+            
             <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>地址</h4>
+                <!-- 聯絡方式卡片 -->
+                <div class="contact-cards">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>地址</h3>
                             <p>日本新瀉縣長岡市</p>
+                            <span class="contact-note">工廠直營，品質保證</span>
                         </div>
                     </div>
 
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>營業時間</h3>
+                            <p>週一至週日</p>
+                            <span class="contact-time">10:00 - 22:00</span>
+                        </div>
+                    </div>
 
-                    <div class="contact-item">
-                        <i class="fas fa-clock"></i>
-                        <div>
-                            <h4>營業時間</h4>
-                            <p>週一至週日 10:00-22:00</p>
+                    <div class="contact-card social-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-line"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Line 客服</h3>
+                            <p>即時諮詢與訂購</p>
+                            <a href="https://line.me/ti/p/~spring.moonbeam" target="_blank" class="contact-link line">
+                                <i class="fab fa-line"></i>
+                                spring.moonbeam
+                            </a>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="fab fa-facebook"></i>
-                        <div>
-                            <h4>Facebook</h4>
-                            <p><a href="https://www.facebook.com/profile.php?id=61563995139034" target="_blank">河谷羽球 Facebook</a></p>
+
+                    <div class="contact-card social-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-facebook"></i>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-line"></i>
-                        <div>
-                            <h4>Line</h4>
-                            <p><a href="https://line.me/ti/p/~spring.moonbeam" target="_blank">spring.moonbeam</a></p>
+                        <div class="contact-details">
+                            <h3>Facebook</h3>
+                            <p>最新產品與活動資訊</p>
+                            <a href="https://www.facebook.com/profile.php?id=61563995139034" target="_blank" class="contact-link facebook">
+                                <i class="fab fa-facebook"></i>
+                                河谷羽球 Facebook
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <h3>發送訊息給我們</h3>
-                    <form>
-                        <input type="text" placeholder="您的姓名" required>
-                        <input type="email" placeholder="您的Email" required>
-                        <input type="tel" placeholder="您的電話">
-                        <textarea placeholder="您的訊息" rows="5" required></textarea>
-                        <button type="submit" class="submit-btn">發送訊息</button>
-                    </form>
+
+                <!-- 聯絡說明 -->
+                <div class="contact-info">
+                    <div class="contact-message">
+                        <h3>為什麼選擇河谷羽球？</h3>
+                        <div class="contact-features">
+                            <div class="contact-feature">
+                                <i class="fas fa-award"></i>
+                                <div>
+                                    <h4>專業諮詢</h4>
+                                    <p>根據您的技術水平和打法風格，提供專業的球拍推薦</p>
+                                </div>
+                            </div>
+                            <div class="contact-feature">
+                                <i class="fas fa-shipping-fast"></i>
+                                <div>
+                                    <h4>快速配送</h4>
+                                    <p>支持配送台灣、香港、新加坡、馬來西亞</p>
+                                </div>
+                            </div>
+                            <div class="contact-feature">
+                                <i class="fas fa-shield-alt"></i>
+                                <div>
+                                    <h4>品質保證</h4>
+                                    <p>日本工廠直營，每支球拍都經過嚴格品質檢驗</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -362,9 +478,9 @@
                 <div class="footer-section">
                     <h4>社群媒體</h4>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=61563995139034" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="#" title="Instagram即將推出"><i class="fab fa-instagram"></i></a>
-                        <a href="https://line.me/ti/p/~spring.moonbeam" target="_blank" title="Line聯絡"><i class="fab fa-line"></i></a>
+                        <a class="social-link facebook" href="https://www.facebook.com/profile.php?id=61563995139034" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a class="social-link instagram" href="#" title="Instagram即將推出" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a class="social-link line" href="https://line.me/ti/p/~spring.moonbeam" target="_blank" title="Line聯絡" aria-label="LINE"><i class="fab fa-line"></i></a>
                     </div>
                 </div>
             </div>
@@ -373,6 +489,36 @@
             </div>
         </div>
     </footer>
+
+    <!-- 購物車側邊欄 -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>購物車</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>購物車是空的</p>
+                <p>快來選擇您喜歡的球拍吧！</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>總計: </span>
+                <span class="total-price">NT$ 0</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">
+                <i class="fas fa-credit-card"></i>
+                結帳
+            </button>
+        </div>
+    </div>
+
+    <!-- 購物車遮罩 -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 
     <script src="script.js"></script>
 </body>
