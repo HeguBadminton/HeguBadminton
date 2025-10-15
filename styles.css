@@ -7,8 +7,9 @@
 body {
     font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #fff;
+    color: #2c3e50;
+    background-color: #ffffff;
+    background-image: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
 }
 
 .container {
@@ -385,6 +386,318 @@ body {
     margin-top: 15px;
 }
 
+.add-to-cart-btn {
+    width: 100%;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+}
+
+.add-to-cart-btn:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #1f5f8b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.add-to-cart-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.add-to-cart-btn i {
+    font-size: 1rem;
+}
+
+/* 購物車圖示 */
+.cart-icon {
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    background: rgba(52, 152, 219, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+}
+
+.cart-icon:hover {
+    background: rgba(52, 152, 219, 0.2);
+    transform: scale(1.1);
+}
+
+.cart-icon i {
+    font-size: 1.2rem;
+    color: #3498db;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    min-width: 20px;
+}
+
+/* 購物車側邊欄 */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+    z-index: 10000;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-sidebar.open {
+    right: 0;
+}
+
+.cart-header {
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+}
+
+.cart-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.5rem;
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-cart:hover {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.empty-cart i {
+    font-size: 3rem;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.empty-cart p {
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+    gap: 15px;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-image {
+    width: 60px;
+    height: 60px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 1.5rem;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+}
+
+.cart-item-price {
+    color: #e74c3c;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.quantity-btn:hover {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.quantity {
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+}
+
+.remove-item {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.remove-item:hover {
+    background: #c0392b;
+    transform: scale(1.1);
+}
+
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+    background: #f8f9fa;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.total-price {
+    color: #e74c3c;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+}
+
+.checkout-btn:hover {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+}
+
+.checkout-btn:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 購物車遮罩 */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.cart-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
 .product-rating {
     display: flex;
     align-items: center;
@@ -712,7 +1025,26 @@ body {
     transition: all 0.3s ease;
 }
 
-.social-links a:hover {
+/* Official brand colors */
+.social-links a.facebook {
+    background: #1877F2;
+}
+.social-links a.facebook i { color: #ffffff; }
+.social-links a.facebook:hover {
+    background: #1461c4;
+}
+
+.social-links a.line {
+    background: #06C755;
+}
+.social-links a.line i { color: #ffffff; }
+.social-links a.line:hover {
+    background: #05a746;
+}
+
+/* Keep neutral default and hover for non-branded links (e.g., Instagram placeholder) */
+.social-links a.instagram:hover,
+.social-links a:not(.facebook):not(.line):hover {
     background: #3498db;
     transform: translateY(-2px);
 }
@@ -771,6 +1103,11 @@ body {
 
     .hamburger {
         display: flex;
+    }
+
+    .cart-icon {
+        display: flex;
+        margin-right: 10px;
     }
 
     .hamburger.active .bar:nth-child(2) {
@@ -917,6 +1254,11 @@ body {
         padding: 3px 6px;
     }
 
+    .add-to-cart-btn {
+        padding: 10px 16px;
+        font-size: 0.95rem;
+    }
+
     .about {
         padding: 80px 0;
     }
@@ -1049,6 +1391,114 @@ body {
     .social-links a {
         width: 35px;
         height: 35px;
+        font-size: 0.9rem;
+    }
+
+    /* 購物車響應式 */
+    .cart-sidebar {
+        width: 100%;
+        right: -100%;
+    }
+
+    .cart-item {
+        padding: 12px 0;
+    }
+
+    .cart-item-image {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .cart-item-name {
+        font-size: 0.9rem;
+    }
+
+    .cart-item-price {
+        font-size: 0.9rem;
+    }
+
+    .quantity-btn {
+        width: 25px;
+        height: 25px;
+        font-size: 0.8rem;
+    }
+
+    .remove-item {
+        width: 22px;
+        height: 22px;
+        font-size: 0.7rem;
+    }
+
+    .checkout-btn {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    /* 聯絡我們響應式 */
+    .contact-cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .contact-card {
+        padding: 25px 20px;
+    }
+
+    .contact-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .contact-details h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+
+    .contact-details p {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+    }
+
+    .contact-link {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        margin-top: 12px;
+    }
+
+    .contact-message {
+        padding: 30px 20px;
+    }
+
+    .contact-message h3 {
+        font-size: 1.6rem;
+        margin-bottom: 25px;
+    }
+
+    .contact-features {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 25px;
+    }
+
+    .contact-feature {
+        padding: 15px;
+    }
+
+    .contact-feature i {
+        font-size: 1.3rem;
+        width: 35px;
+    }
+
+    .contact-feature h4 {
+        font-size: 1rem;
+        margin-bottom: 6px;
+    }
+
+    .contact-feature p {
         font-size: 0.9rem;
     }
 }
@@ -1336,6 +1786,88 @@ body {
         height: 32px;
         font-size: 0.85rem;
     }
+
+    .add-to-cart-btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    /* 聯絡我們小螢幕響應式 */
+    .contact-subtitle {
+        font-size: 1rem;
+        margin-bottom: 40px;
+    }
+
+    .contact-cards {
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .contact-card {
+        padding: 20px 15px;
+    }
+
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+
+    .contact-details h3 {
+        font-size: 1.1rem;
+        margin-bottom: 6px;
+    }
+
+    .contact-details p {
+        font-size: 0.85rem;
+        margin-bottom: 4px;
+    }
+
+    .contact-note,
+    .contact-time {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+        margin-top: 8px;
+    }
+
+    .contact-link {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+        margin-top: 10px;
+    }
+
+    .contact-message {
+        padding: 25px 15px;
+    }
+
+    .contact-message h3 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+
+    .contact-features {
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .contact-feature {
+        padding: 12px;
+    }
+
+    .contact-feature i {
+        font-size: 1.2rem;
+        width: 30px;
+    }
+
+    .contact-feature h4 {
+        font-size: 0.95rem;
+        margin-bottom: 4px;
+    }
+
+    .contact-feature p {
+        font-size: 0.85rem;
+    }
 }
 
 /* 瓒呭皬铻㈠箷閬╅厤 */
@@ -1496,4 +2028,821 @@ body {
 .scroll-animate.animate {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* 新的聯絡我們樣式 */
+.contact {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.contact-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 60px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.contact-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+.contact-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.contact-card.social-card::before {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+}
+
+.contact-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.social-card .contact-icon {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+}
+
+.contact-details h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.contact-details p {
+    color: #666;
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.contact-note {
+    display: inline-block;
+    background: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.contact-time {
+    display: inline-block;
+    background: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+}
+
+.contact-link:hover {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+    color: white;
+}
+
+.contact-message {
+    background: #fff;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.contact-message h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+.contact-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.contact-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    text-align: left;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.contact-feature:hover {
+    background: #e9ecef;
+    transform: translateY(-3px);
+}
+
+.contact-feature i {
+    font-size: 1.5rem;
+    color: #3498db;
+    width: 40px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.contact-feature h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+
+.contact-feature p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* YONEX風格樣式覆蓋 */
+/* 導航欄 - YONEX風格 */
+.navbar {
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(15px) !important;
+    border-bottom: 2px solid #0066cc !important;
+    box-shadow: 0 2px 10px rgba(0, 102, 204, 0.1) !important;
+}
+
+.nav-logo h2 {
+    color: #0066cc !important;
+    font-weight: 700 !important;
+}
+
+.nav-link {
+    color: #2c3e50 !important;
+    font-weight: 500 !important;
+}
+
+.nav-link:hover {
+    color: #0066cc !important;
+    background: rgba(0, 102, 204, 0.1) !important;
+}
+
+/* 主要按鈕 - YONEX藍色 */
+.cta-button, .add-to-cart-btn, .submit-btn, .checkout-btn {
+    background: linear-gradient(135deg, #0066cc 0%, #004499 100%) !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3) !important;
+}
+
+.cta-button:hover, .add-to-cart-btn:hover, .submit-btn:hover, .checkout-btn:hover {
+    background: linear-gradient(135deg, #004499 0%, #003366 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4) !important;
+}
+
+/* 產品卡片 - YONEX風格 */
+.product-card {
+    background: #ffffff !important;
+    border: 1px solid #e8f4fd !important;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.08) !important;
+    transition: all 0.3s ease !important;
+}
+
+.product-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.15) !important;
+    border-color: #0066cc !important;
+}
+
+.racket-type {
+    background: #0066cc !important;
+    color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3) !important;
+}
+
+.price {
+    color: #e74c3c !important;
+    font-weight: 700 !important;
+}
+
+/* 輪播圖 - YONEX風格 */
+.carousel-container {
+    border: 2px solid #e8f4fd !important;
+    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.1) !important;
+}
+
+.carousel-btn {
+    background: rgba(0, 102, 204, 0.8) !important;
+    border: 1px solid #0066cc !important;
+}
+
+.carousel-btn:hover {
+    background: #0066cc !important;
+    transform: scale(1.1) !important;
+}
+
+.dot.active {
+    background: #0066cc !important;
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3) !important;
+}
+
+/* 購物車 - YONEX風格 */
+.cart-icon {
+    background: rgba(0, 102, 204, 0.1) !important;
+}
+
+.cart-icon:hover {
+    background: rgba(0, 102, 204, 0.2) !important;
+}
+
+.cart-icon i {
+    color: #0066cc !important;
+}
+
+.cart-count {
+    background: #0066cc !important;
+}
+
+.cart-sidebar {
+    border-left: 3px solid #0066cc !important;
+    box-shadow: -5px 0 20px rgba(0, 102, 204, 0.1) !important;
+}
+
+/* 聯絡我們 - YONEX風格 */
+.contact {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+}
+
+.contact-card {
+    background: #ffffff !important;
+    border: 1px solid #e8f4fd !important;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.08) !important;
+}
+
+.contact-card::before {
+    background: linear-gradient(135deg, #0066cc 0%, #004499 100%) !important;
+}
+
+.contact-icon {
+    background: linear-gradient(135deg, #0066cc 0%, #004499 100%) !important;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3) !important;
+}
+
+.social-card .contact-icon {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3) !important;
+}
+
+/* 聯絡我們區塊的Facebook和LINE官方品牌色 */
+.contact-card.social-card .contact-icon i.fa-facebook {
+    color: #ffffff !important;
+}
+
+.contact-card.social-card .contact-icon i.fa-line {
+    color: #ffffff !important;
+}
+
+/* 為Facebook圖標容器添加品牌色背景 */
+.contact-card.social-card:has(.fa-facebook) .contact-icon {
+    background: #1877F2 !important;
+    box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3) !important;
+}
+
+/* 為LINE圖標容器添加品牌色背景 */
+.contact-card.social-card:has(.fa-line) .contact-icon {
+    background: #06C755 !important;
+    box-shadow: 0 4px 15px rgba(6, 199, 85, 0.3) !important;
+}
+
+.contact-card.social-card .contact-link.facebook {
+    background: #1877F2 !important;
+    box-shadow: 0 3px 10px rgba(24, 119, 242, 0.3) !important;
+}
+
+.contact-card.social-card .contact-link.facebook:hover {
+    background: #1461c4 !important;
+    box-shadow: 0 5px 15px rgba(24, 119, 242, 0.4) !important;
+}
+
+.contact-card.social-card .contact-link.line {
+    background: #06C755 !important;
+    box-shadow: 0 3px 10px rgba(6, 199, 85, 0.3) !important;
+}
+
+.contact-card.social-card .contact-link.line:hover {
+    background: #05a746 !important;
+    box-shadow: 0 5px 15px rgba(6, 199, 85, 0.4) !important;
+}
+
+.contact-link {
+    background: linear-gradient(135deg, #0066cc 0%, #004499 100%) !important;
+    box-shadow: 0 3px 10px rgba(0, 102, 204, 0.3) !important;
+}
+
+.contact-link:hover {
+    background: linear-gradient(135deg, #004499 0%, #003366 100%) !important;
+    box-shadow: 0 5px 15px rgba(0, 102, 204, 0.4) !important;
+}
+
+/* 頁腳 - YONEX風格 */
+.footer {
+    background: #2c3e50 !important;
+    border-top: 3px solid #0066cc !important;
+}
+
+.social-links a:hover {
+    background: #0066cc !important;
+    transform: translateY(-2px) !important;
+}
+
+/* 評分星星 - YONEX風格 */
+.product-rating .stars {
+    color: #ffa500 !important;
+}
+
+.product-rating .rating-text {
+    background: rgba(0, 102, 204, 0.1) !important;
+    color: #0066cc !important;
+    border: 1px solid rgba(0, 102, 204, 0.3) !important;
+}
+
+/* 好評系統樣式 */
+.product-reviews {
+    margin: 15px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e8f4fd;
+}
+
+.reviews-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.reviews-count {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.reviews-rating {
+    font-size: 0.9rem;
+    color: #ffa500;
+    font-weight: 600;
+}
+
+.reviews-list {
+    margin-bottom: 12px;
+}
+
+.review-item {
+    margin-bottom: 12px;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.review-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.1);
+    border-color: #e8f4fd;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.review-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-avatar {
+    font-size: 1.2rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    border-radius: 50%;
+}
+
+.user-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.review-rating {
+    font-size: 0.8rem;
+    color: #ffa500;
+}
+
+.review-text {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.review-date {
+    font-size: 0.75rem;
+    color: #999;
+}
+
+.view-all-reviews-btn {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(0, 102, 204, 0.1);
+    color: #0066cc;
+    border: 1px solid rgba(0, 102, 204, 0.3);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-all-reviews-btn:hover {
+    background: #0066cc;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* 好評彈窗樣式 */
+.reviews-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.reviews-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.reviews-modal-content {
+    background: white;
+    border-radius: 15px;
+    max-width: 800px;
+    max-height: 80vh;
+    width: 90%;
+    overflow: hidden;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.reviews-modal.show .reviews-modal-content {
+    transform: scale(1);
+}
+
+.reviews-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.reviews-modal-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.reviews-modal-body {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.reviews-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.stats-item {
+    text-align: center;
+}
+
+.stats-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #0066cc;
+    margin-bottom: 5px;
+}
+
+.stats-label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.all-reviews-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.review-item-full {
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.review-item-full:hover {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 102, 204, 0.1);
+    border-color: #e8f4fd;
+}
+
+.review-item-full .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.review-item-full .review-text {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+.review-item-full .review-date {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .reviews-modal-content {
+        width: 95%;
+        max-height: 85vh;
+    }
+    
+    .reviews-stats {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .stats-number {
+        font-size: 1.5rem;
+    }
+    
+    .reviews-modal-header {
+        padding: 15px;
+    }
+    
+    .reviews-modal-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .reviews-modal-body {
+        padding: 15px;
+    }
+    
+    .product-reviews {
+        padding: 12px;
+    }
+    
+    .review-item {
+        padding: 8px;
+    }
+    
+    .user-avatar {
+        font-size: 1rem;
+        width: 20px;
+        height: 20px;
+    }
+    
+    .user-name {
+        font-size: 0.85rem;
+    }
+    
+    .review-text {
+        font-size: 0.8rem;
+    }
+}
+
+/* 首頁橫幅 - YONEX風格 */
+.hero {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e8f4fd 100%) !important;
+    border-bottom: 3px solid #0066cc !important;
+}
+
+.hero-content h1 {
+    color: #2c3e50 !important;
+    text-shadow: 0 2px 4px rgba(0, 102, 204, 0.1) !important;
+}
+
+.hero-content p {
+    color: #2c3e50 !important;
+    opacity: 0.8 !important;
+}
+
+/* 產品區塊 - YONEX風格 */
+.products {
+    background: #ffffff !important;
+    border-top: 2px solid #e8f4fd !important;
+}
+
+.products h2 {
+    color: #2c3e50 !important;
+    position: relative !important;
+}
+
+.products h2::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 60px !important;
+    height: 3px !important;
+    background: linear-gradient(135deg, #0066cc 0%, #004499 100%) !important;
+    border-radius: 2px !important;
+}
+
+.section-subtitle {
+    color: #666 !important;
+}
+
+/* 關於我們 - YONEX風格 */
+.about {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%) !important;
+    border-top: 2px solid #e8f4fd !important;
+}
+
+.about h2 {
+    color: #2c3e50 !important;
+    position: relative !important;
+}
+
+.about h2::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 60px !important;
+    height: 3px !important;
+    background: linear-gradient(135deg, #0066cc 0%, #004499 100%) !important;
+    border-radius: 2px !important;
+}
+
+.feature {
+    background: #ffffff !important;
+    border: 1px solid #e8f4fd !important;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.08) !important;
+}
+
+.feature:hover {
+    background: #f8f9fa !important;
+    border-color: #0066cc !important;
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.15) !important;
+}
+
+.feature i {
+    color: #0066cc !important;
+}
+
+/* 標題裝飾線 */
+.contact h2 {
+    color: #2c3e50 !important;
+    position: relative !important;
+}
+
+.contact h2::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 60px !important;
+    height: 3px !important;
+    background: linear-gradient(135deg, #0066cc 0%, #004499 100%) !important;
+    border-radius: 2px !important;
+}
+
+/* 響應式優化 */
+@media (max-width: 768px) {
+    .hero {
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%) !important;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.8rem !important;
+        color: #2c3e50 !important;
+    }
+    
+    .hero-content p {
+        color: #2c3e50 !important;
+    }
 }
