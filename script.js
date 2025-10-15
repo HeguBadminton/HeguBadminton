@@ -1003,8 +1003,8 @@ function checkout() {
     const message = `🏸 河谷羽球訂購單\n\n📋 商品清單：\n${itemList}\n\n💰 總計：NT$ ${total.toLocaleString()}\n\n請問如何完成付款？謝謝！`;
     
     // 使用Facebook Messenger URL scheme（如果在手機上）
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const facebookUrl = isMobile 
+    //const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    //const facebookUrl = isMobile 
         ? 'https://www.facebook.com/profile.php?id=61563995139034' // 手機App
         : 'https://www.facebook.com/profile.php?id=61563995139034'; // 網頁版Messenger
     
@@ -1015,12 +1015,12 @@ function checkout() {
             
             setTimeout(() => {
                 // 嘗試開啟Messenger
-                const messengerWindow = window.open(facebookUrl, '_blank');
+                //const messengerWindow = window.open(facebookUrl, '_blank');
                 
                 // 如果Messenger無法開啟，則開啟Facebook頁面
                 setTimeout(() => {
                     if (!messengerWindow || messengerWindow.closed) {
-                        window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
+                        //window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
                     }
                 }, 500);
                 
@@ -1033,9 +1033,9 @@ function checkout() {
             // 複製失敗也跳轉
             showNotification('即將前往Facebook完成訂購...', 'info');
             setTimeout(() => {
-                window.open(facebookUrl, '_blank');
+                //window.open(facebookUrl, '_blank');
                 setTimeout(() => {
-                    window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
+                    //window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
                 }, 500);
                 cart = [];
                 updateCartUI();
@@ -1046,9 +1046,9 @@ function checkout() {
         // 不支援剪貼板直接跳轉
         showNotification('即將前往Facebook完成訂購...', 'info');
         setTimeout(() => {
-            window.open(facebookUrl, '_blank');
+            //window.open(facebookUrl, '_blank');
             setTimeout(() => {
-                window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
+                //window.open('https://www.facebook.com/profile.php?id=61563995139034', '_blank');
             }, 500);
             cart = [];
             updateCartUI();
