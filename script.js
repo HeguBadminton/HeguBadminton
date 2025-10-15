@@ -498,6 +498,555 @@ function createBackToTopButton() {
 // 初始化返回頂部按鈕
 createBackToTopButton();
 
+// 購物車功能
+let cart = [];
+
+// 好評數據庫
+const userNames = [
+    '王小明', '李小華', '張志強', '陳美玲', '林建國', '黃淑芬', '吳志明', '鄭雅婷',
+    '蔡文彬', '許家豪', '周淑惠', '謝志偉', '楊雅雯', '劉建民', '曾美玲', '彭志豪',
+    '蘇雅婷', '何建國', '羅淑芬', '葉志明', '江雅雯', '馬志豪', '高美玲', '徐建國',
+    '梁雅婷', '宋志明', '方淑惠', '鄧建民', '唐雅雯', '范志豪', '石美玲', '薛建國',
+    '呂雅婷', '柯志明', '孫淑惠', '莊建民', '田雅雯', '洪志豪', '白美玲', '盧建國',
+    '廖雅婷', '鍾志明', '游淑惠', '簡建民', '胡雅雯', '魏志豪', '潘美玲', '邱建國',
+    '郭雅婷', '趙志明', '錢淑惠', '沈建民', '韓雅雯', '馮志豪', '朱美玲', '秦建國',
+    '尤雅婷', '許志明', '何淑惠', '施建民', '張雅雯', '孔志豪', '曹美玲', '嚴建國',
+    '華雅婷', '金志明', '魏淑惠', '陶建民', '姜雅雯', '戚志豪', '謝美玲', '鄒建國',
+    '喻雅婷', '柏志明', '水淑惠', '竇建民', '章雅雯', '雲志豪', '蘇美玲', '潘建國',
+    '葛雅婷', '奚志明', '范淑惠', '彭建民', '郎雅雯', '魯志豪', '韋美玲', '昌建國',
+    '馬雅婷', '苗志明', '鳳淑惠', '花建民', '方雅雯', '俞志豪', '任美玲', '袁建國',
+    '柳雅婷', '鮑志明', '史淑惠', '唐建民', '費雅雯', '廉志豪', '岑美玲', '薛建國',
+    '雷雅婷', '賀志明', '倪淑惠', '湯建民', '滕雅雯', '殷志豪', '羅美玲', '畢建國',
+    '郝雅婷', '鄔志明', '安淑惠', '常建民', '樂雅雯', '于志豪', '時美玲', '傅建國',
+    '皮雅婷', '卞志明', '齊淑惠', '康建民', '伍雅雯', '余志豪', '元美玲', '卜建國',
+    '顧雅婷', '孟志明', '平淑惠', '黃建民', '和雅雯', '穆志豪', '蕭美玲', '尹建國'
+];
+
+const userAvatars = [
+    '👨‍💼', '👩‍💼', '👨‍🎓', '👩‍🎓', '👨‍🏫', '👩‍🏫', '👨‍⚕️', '👩‍⚕️',
+    '👨‍🍳', '👩‍🍳', '👨‍🔧', '👩‍🔧', '👨‍💻', '👩‍💻', '👨‍🎨', '👩‍🎨',
+    '👨‍🚀', '👩‍🚀', '👨‍✈️', '👩‍✈️', '👨‍🚒', '👩‍🚒', '👨‍🌾', '👩‍🌾',
+    '👨‍🏭', '👩‍🏭', '👨‍💼', '👩‍💼', '👨‍🎓', '👩‍🎓', '👨‍🏫', '👩‍🏫',
+    '👨‍⚕️', '👩‍⚕️', '👨‍🍳', '👩‍🍳', '👨‍🔧', '👩‍🔧', '👨‍💻', '👩‍💻',
+    '👨‍🎨', '👩‍🎨', '👨‍🚀', '👩‍🚀', '👨‍✈️', '👩‍✈️', '👨‍🚒', '👩‍🚒',
+    '👨‍🌾', '👩‍🌾', '👨‍🏭', '👩‍🏭', '👨‍💼', '👩‍💼', '👨‍🎓', '👩‍🎓',
+    '👨‍🏫', '👩‍🏫', '👨‍⚕️', '👩‍⚕️', '👨‍🍳', '👩‍🍳', '👨‍🔧', '👩‍🔧',
+    '👨‍💻', '👩‍💻', '👨‍🎨', '👩‍🎨', '👨‍🚀', '👩‍🚀', '👨‍✈️', '👩‍✈️',
+    '👨‍🚒', '👩‍🚒', '👨‍🌾', '👩‍🌾', '👨‍🏭', '👩‍🏭', '👨‍💼', '👩‍💼',
+    '👨‍🎓', '👩‍🎓', '👨‍🏫', '👩‍🏫', '👨‍⚕️', '👩‍⚕️', '👨‍🍳', '👩‍🍳',
+    '👨‍🔧', '👩‍🔧', '👨‍💻', '👩‍💻', '👨‍🎨', '👩‍🎨', '👨‍🚀', '👩‍🚀',
+    '👨‍✈️', '👩‍✈️', '👨‍🚒', '👩‍🚒', '👨‍🌾', '👩‍🌾', '👨‍🏭', '👩‍🏭',
+    '👨‍💼', '👩‍💼', '👨‍🎓', '👩‍🎓', '👨‍🏫', '👩‍🏫', '👨‍⚕️', '👩‍⚕️',
+    '👨‍🍳', '👩‍🍳', '👨‍🔧', '👩‍🔧', '👨‍💻', '👩‍💻', '👨‍🎨', '👩‍🎨'
+];
+
+const reviewTemplates = {
+    'archery-11-pro': [
+        '弓箭11 Pro真的超棒！殺球威力驚人，控制也很精準。',
+        '這支球拍讓我從業餘晉升到半專業水平，手感絕佳！',
+        '專業選手推薦的球拍就是不一樣，攻擊力爆表！',
+        '輕量化設計讓我在場上更靈活，殺球速度明顯提升。',
+        '碳纖維材質質感很好，擊球聲音清脆悅耳。',
+        '攻守兼備的完美設計，是我打過最棒的球拍！',
+        '從新手到現在，這支球拍陪伴我成長，值得推薦！',
+        '手感舒適，擊球穩定，專業級的品質無話可說。',
+        '殺球威力驚人，對手都說我的球速變快了！',
+        '性價比超高，這價位能買到這種品質真的很棒！'
+    ],
+    'archery': [
+        '弓箭系列經典之作，平衡感極佳，適合各種打法。',
+        '新手入門首選，容易上手，擊球手感很好。',
+        '經典設計歷久不衰，品質穩定可靠。',
+        '平衡型球拍的典範，攻守都表現出色。',
+        '高彈性碳纖維讓擊球更有力，手感絕佳。',
+        '適合各種技術水平的選手，實用性很高。',
+        '經典款就是經典款，永遠不會過時！',
+        '擊球手感柔軟舒適，長時間使用也不累。',
+        '價格合理，品質優秀，性價比很高。',
+        '從業餘到專業都能駕馭，萬能型球拍！'
+    ],
+    '100zz': [
+        '100ZZ世界冠軍同款！殺球威力真的超強！',
+        '重頭設計讓殺球更有力，攻擊力爆表！',
+        '頂級碳纖維材質，耐用性超強，值得投資！',
+        '追求極致進攻的選手必備，殺球速度驚人！',
+        '這支球拍讓我成為場上的攻擊手！',
+        '世界冠軍都在用，品質絕對有保證！',
+        '殺球威力強大，讓對手毫無反應時間。',
+        '重頭設計剛開始需要適應，但威力驚人！',
+        '專業級球拍的頂峰之作，攻擊力無與倫比！',
+        '這支球拍讓我的殺球技術大幅提升！'
+    ],
+    '1000z': [
+        '1000Z輕量化設計太棒了！反應速度超快！',
+        '新一代科技讓球拍更輕更強，速度型選手首選！',
+        '輕量化但威力不減，高科技的完美體現！',
+        '超快反應速度讓我在場上如虎添翼！',
+        '速度型選手的完美搭檔，輕快有力！',
+        '革命性設計，重量輕但攻擊力驚人！',
+        '高科技碳纖維複合材料，品質一流！',
+        '輕量化設計讓揮拍更流暢，速度更快！',
+        '新一代球拍的傑出代表，科技感十足！',
+        '這支球拍讓我的球速提升了一個檔次！'
+    ],
+    '99-pro': [
+        '99 Pro重砲手的最愛！殺球威力驚人！',
+        '專業級進攻型球拍，攻擊力超強！',
+        '重砲手的完美武器，殺球威力爆表！',
+        '進攻性能完美平衡，控制性也很好！',
+        '高品質碳纖維，經久耐用，值得信賴！',
+        '征戰賽場的可靠夥伴，品質穩定！',
+        '重砲手的終極選擇，攻擊力無與倫比！',
+        '專業級品質，進攻威力驚人！',
+        '這支球拍讓我成為場上的重砲手！',
+        '99 Pro系列的代表作，攻擊力超強！'
+    ],
+    'wind-blade': [
+        '風刃系列攻擊利器！殺球速度快如閃電！',
+        '如風般銳利的進攻，讓對手措手不及！',
+        '攻擊型球拍的代表作，進攻威力驚人！',
+        '殺球速度快如閃電，攻擊利器！',
+        '獨特框型設計減少阻力，速度更快！',
+        '專為強力進攻設計，攻擊力爆表！',
+        '風刃系列讓我的進攻更有威脅性！',
+        '攻擊型選手的完美選擇，威力驚人！',
+        '殺球速度快如閃電，讓對手毫無招架之力！',
+        '風刃設計讓進攻更犀利，攻擊力超強！'
+    ],
+    '77-pro': [
+        '77 Pro全能型球拍，攻守自如！',
+        '一拍在手，攻守兼備，靈活多變！',
+        '全能型設計適合各種打法風格！',
+        '進攻型還是防守型都能完美駕馭！',
+        '靈活多變的設計讓我在場上無所不能！',
+        '全能型球拍的傑出代表，實用性很高！',
+        '攻守兼備的完美設計，適應性強！',
+        '這支球拍讓我成為場上的全能選手！',
+        '77 Pro系列的全能型球拍，表現出色！',
+        '攻守自如的設計讓比賽更有優勢！'
+    ],
+    'vtzf2': [
+        'VTZF2經典進攻型球拍，傳奇重頭設計！',
+        '殺球威力強大無比，讓對手聞風喪膽！',
+        '經典框型歷久不衰，傳統進攻打法首選！',
+        '重頭設計讓殺球更有力，攻擊威力驚人！',
+        '經典進攻型球拍的典範之作！',
+        '傳統進攻打法的完美選擇，威力強大！',
+        'VTZF2系列的代表作，進攻威力驚人！',
+        '經典設計永遠不會過時，品質可靠！',
+        '重頭設計讓殺球威力倍增，攻擊力超強！',
+        '這支球拍讓我的進攻技術更上一層樓！'
+    ],
+    '800-pro': [
+        '800 Pro性價比之王！強力進攻性能！',
+        '專業級攻擊型球拍，價格親民！',
+        '殺球威力十足，性價比超高！',
+        '高品質碳纖維材質，耐用性超強！',
+        '提升技術的絕佳選擇，性價比之王！',
+        '專業級品質，平民價格，超值選擇！',
+        '800 Pro系列讓進攻更強力，價格實惠！',
+        '性價比之王，攻擊威力驚人！',
+        '這支球拍讓我在預算內獲得專業級品質！',
+        '攻擊型球拍的性價比典範，值得推薦！'
+    ],
+    '99': [
+        '99系列重砲手的終極武器！',
+        '經典進攻型球拍，殺球威力驚人！',
+        '重砲手的完美選擇，攻擊力爆表！',
+        '專為強力進攻設計，威力驚人！',
+        '經典框型設計歷經考驗，品質可靠！',
+        '征戰賽場的可靠夥伴，進攻威力超強！',
+        '99系列讓重砲手的進攻更有威脅性！',
+        '經典進攻型球拍的傑出代表！',
+        '這支球拍讓我的殺球技術大幅提升！',
+        '重砲手的終極武器，攻擊力無與倫比！'
+    ]
+};
+
+// 生成隨機好評
+function generateRandomReviews(productId, count = 150) {
+    const reviews = [];
+    const templates = reviewTemplates[productId] || reviewTemplates['archery-11-pro'];
+    
+    for (let i = 0; i < count; i++) {
+        const userName = userNames[Math.floor(Math.random() * userNames.length)];
+        const userAvatar = userAvatars[Math.floor(Math.random() * userAvatars.length)];
+        const template = templates[Math.floor(Math.random() * templates.length)];
+        
+        // 添加一些變化
+        const variations = [
+            '', '真的很推薦！', '品質超棒！', '值得購買！', '非常滿意！', 
+            '手感很好！', '攻擊力驚人！', '性價比很高！', '專業級品質！', '值得信賴！'
+        ];
+        
+        const variation = variations[Math.floor(Math.random() * variations.length)];
+        const reviewText = template + variation;
+        
+        // 隨機評分 (4-5星)
+        const rating = Math.random() > 0.1 ? 5 : 4;
+        
+        reviews.push({
+            userName,
+            userAvatar,
+            reviewText,
+            rating,
+            date: generateRandomDate()
+        });
+    }
+    
+    return reviews;
+}
+
+// 生成隨機日期 (最近6個月內)
+function generateRandomDate() {
+    const now = new Date();
+    const sixMonthsAgo = new Date(now.getTime() - (6 * 30 * 24 * 60 * 60 * 1000));
+    const randomTime = sixMonthsAgo.getTime() + Math.random() * (now.getTime() - sixMonthsAgo.getTime());
+    return new Date(randomTime);
+}
+
+// 產品好評數據
+const productReviews = {
+    'archery-11-pro': generateRandomReviews('archery-11-pro', 180),
+    'archery': generateRandomReviews('archery', 165),
+    '100zz': generateRandomReviews('100zz', 195),
+    '1000z': generateRandomReviews('1000z', 175),
+    '99-pro': generateRandomReviews('99-pro', 170),
+    'wind-blade': generateRandomReviews('wind-blade', 160),
+    '77-pro': generateRandomReviews('77-pro', 155),
+    'vtzf2': generateRandomReviews('vtzf2', 185),
+    '800-pro': generateRandomReviews('800-pro', 145),
+    '99': generateRandomReviews('99', 165)
+};
+
+// 加入購物車
+function addToCart(productId, productName, price) {
+    const existingItem = cart.find(item => item.id === productId);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id: productId,
+            name: productName,
+            price: price,
+            quantity: 1
+        });
+    }
+    
+    updateCartUI();
+    showNotification(`${productName} 已加入購物車！`, 'success');
+}
+
+// 更新購物車數量
+function updateCartCount() {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartCount = document.querySelector('.cart-count');
+    if (cartCount) {
+        cartCount.textContent = totalItems;
+        cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+    }
+}
+
+// 更新購物車UI
+function updateCartUI() {
+    const cartItems = document.getElementById('cartItems');
+    const totalPrice = document.querySelector('.total-price');
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    
+    if (cart.length === 0) {
+        cartItems.innerHTML = `
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>購物車是空的</p>
+                <p>快來選擇您喜歡的球拍吧！</p>
+            </div>
+        `;
+        if (totalPrice) totalPrice.textContent = 'NT$ 0';
+        if (checkoutBtn) checkoutBtn.disabled = true;
+    } else {
+        cartItems.innerHTML = cart.map(item => `
+            <div class="cart-item">
+                <div class="cart-item-image">
+                    <i class="fas fa-table-tennis"></i>
+                </div>
+                <div class="cart-item-info">
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-price">NT$ ${item.price.toLocaleString()}</div>
+                </div>
+                <div class="cart-item-controls">
+                    <button class="quantity-btn" onclick="updateQuantity('${item.id}', ${item.quantity - 1})">-</button>
+                    <span class="quantity">${item.quantity}</span>
+                    <button class="quantity-btn" onclick="updateQuantity('${item.id}', ${item.quantity + 1})">+</button>
+                    <button class="remove-item" onclick="removeFromCart('${item.id}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+        
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        if (totalPrice) totalPrice.textContent = `NT$ ${total.toLocaleString()}`;
+        if (checkoutBtn) checkoutBtn.disabled = false;
+    }
+    
+    updateCartCount();
+}
+
+// 更新商品數量
+function updateQuantity(productId, newQuantity) {
+    const item = cart.find(item => item.id === productId);
+    if (item) {
+        if (newQuantity <= 0) {
+            removeFromCart(productId);
+        } else {
+            item.quantity = newQuantity;
+            updateCartUI();
+        }
+    }
+}
+
+// 從購物車移除商品
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCartUI();
+    showNotification('商品已從購物車移除', 'info');
+}
+
+// 切換購物車顯示
+function toggleCart() {
+    const cartSidebar = document.getElementById('cartSidebar');
+    const cartOverlay = document.getElementById('cartOverlay');
+    
+    if (cartSidebar && cartOverlay) {
+        const isOpen = cartSidebar.classList.contains('open');
+        
+        if (isOpen) {
+            cartSidebar.classList.remove('open');
+            cartOverlay.classList.remove('show');
+            document.body.style.overflow = '';
+        } else {
+            cartSidebar.classList.add('open');
+            cartOverlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+}
+
+// 結帳功能
+function checkout() {
+    if (cart.length === 0) {
+        showNotification('購物車是空的', 'error');
+        return;
+    }
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const itemList = cart.map(item => `${item.name} x${item.quantity}`).join('\n');
+    
+    // 這裡可以整合實際的支付系統
+    const message = `感謝您的購買！\n\n商品清單：\n${itemList}\n\n總計：NT$ ${total.toLocaleString()}\n\n請聯繫我們完成付款：\nLine: spring.moonbeam\nFacebook: 河谷羽球`;
+    
+    // 複製到剪貼板
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(message).then(() => {
+            showNotification('訂單資訊已複製到剪貼板！請聯繫我們完成付款。', 'success');
+            // 跳轉到facebook並發送剪貼板上的訊息
+            window.open('https://www.facebook.com/messages/t/332812596593087', '_blank');
+            
+        });
+    } else {
+        showNotification(`總計：NT$ ${total.toLocaleString()}，請聯繫我們完成付款！`, 'success');
+    }
+    
+    // 清空購物車
+    cart = [];
+    updateCartUI();
+    toggleCart();
+}
+
+// 初始化好評顯示
+function initializeReviews() {
+    Object.keys(productReviews).forEach(productId => {
+        displayProductReviews(productId);
+    });
+}
+
+// 顯示產品好評
+function displayProductReviews(productId) {
+    const reviewsContainer = document.getElementById(`reviews-${productId}`);
+    if (!reviewsContainer) return;
+    
+    const reviews = productReviews[productId];
+    if (!reviews || reviews.length === 0) return;
+    
+    // 顯示前3個好評
+    const displayReviews = reviews.slice(0, 3);
+    
+    let reviewsHTML = `
+        <div class="reviews-summary">
+            <span class="reviews-count">${reviews.length} 個好評</span>
+            <span class="reviews-rating">★★★★★ (${calculateAverageRating(reviews).toFixed(1)})</span>
+        </div>
+        <div class="reviews-list">
+    `;
+    
+    displayReviews.forEach(review => {
+        reviewsHTML += `
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="review-user">
+                        <span class="user-avatar">${review.userAvatar}</span>
+                        <span class="user-name">${review.userName}</span>
+                    </div>
+                    <div class="review-rating">
+                        ${generateStars(review.rating)}
+                    </div>
+                </div>
+                <div class="review-text">${review.reviewText}</div>
+                <div class="review-date">${formatDate(review.date)}</div>
+            </div>
+        `;
+    });
+    
+    reviewsHTML += `
+        </div>
+        <button class="view-all-reviews-btn" onclick="showAllReviews('${productId}')">
+            查看全部 ${reviews.length} 個好評
+        </button>
+    `;
+    
+    reviewsContainer.innerHTML = reviewsHTML;
+}
+
+// 計算平均評分
+function calculateAverageRating(reviews) {
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return totalRating / reviews.length;
+}
+
+// 生成星級顯示
+function generateStars(rating) {
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+        if (i <= rating) {
+            stars += '★';
+        } else {
+            stars += '☆';
+        }
+    }
+    return stars;
+}
+
+// 格式化日期
+function formatDate(date) {
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 1) {
+        return '昨天';
+    } else if (diffDays < 7) {
+        return `${diffDays}天前`;
+    } else if (diffDays < 30) {
+        const weeks = Math.floor(diffDays / 7);
+        return `${weeks}週前`;
+    } else if (diffDays < 365) {
+        const months = Math.floor(diffDays / 30);
+        return `${months}個月前`;
+    } else {
+        const years = Math.floor(diffDays / 365);
+        return `${years}年前`;
+    }
+}
+
+// 顯示所有好評
+function showAllReviews(productId) {
+    const reviews = productReviews[productId];
+    if (!reviews || reviews.length === 0) return;
+    
+    // 創建好評彈窗
+    const modal = document.createElement('div');
+    modal.className = 'reviews-modal';
+    modal.innerHTML = `
+        <div class="reviews-modal-content">
+            <div class="reviews-modal-header">
+                <h3>${getProductName(productId)} - 全部好評</h3>
+                <button class="close-modal" onclick="closeReviewsModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="reviews-modal-body">
+                <div class="reviews-stats">
+                    <div class="stats-item">
+                        <span class="stats-number">${reviews.length}</span>
+                        <span class="stats-label">總評價</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-number">${calculateAverageRating(reviews).toFixed(1)}</span>
+                        <span class="stats-label">平均評分</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-number">${Math.round((reviews.filter(r => r.rating === 5).length / reviews.length) * 100)}%</span>
+                        <span class="stats-label">五星好評率</span>
+                    </div>
+                </div>
+                <div class="all-reviews-list">
+                    ${reviews.map(review => `
+                        <div class="review-item-full">
+                            <div class="review-header">
+                                <div class="review-user">
+                                    <span class="user-avatar">${review.userAvatar}</span>
+                                    <span class="user-name">${review.userName}</span>
+                                </div>
+                                <div class="review-rating">
+                                    ${generateStars(review.rating)}
+                                </div>
+                                <div class="review-date">${formatDate(review.date)}</div>
+                            </div>
+                            <div class="review-text">${review.reviewText}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // 添加動畫效果
+    setTimeout(() => {
+        modal.classList.add('show');
+    }, 10);
+}
+
+// 獲取產品名稱
+function getProductName(productId) {
+    const productNames = {
+        'archery-11-pro': '弓箭11 Pro 框型',
+        'archery': '弓箭框型',
+        '100zz': '100ZZ 框型',
+        '1000z': '1000Z 框型',
+        '99-pro': '99 Pro 框型',
+        'wind-blade': '風刃框型',
+        '77-pro': '77 Pro 框型',
+        'vtzf2': 'VTZF2 框型',
+        '800-pro': '800 Pro 框型',
+        '99': '99 框型'
+    };
+    return productNames[productId] || '產品';
+}
+
+// 關閉好評彈窗
+function closeReviewsModal() {
+    const modal = document.querySelector('.reviews-modal');
+    if (modal) {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.remove();
+        }, 300);
+    }
+}
+
 // 產品搜尋功能（未來擴展）
 function initializeSearch() {
     const searchInput = document.createElement('input');
@@ -567,5 +1116,11 @@ document.addEventListener('DOMContentLoaded', () => {
         loader.style.opacity = '0';
         setTimeout(() => loader.remove(), 500);
     }, 1000);
+    
+    // 初始化購物車UI
+    updateCartUI();
+    
+    // 初始化好評顯示
+    initializeReviews();
 });
 
