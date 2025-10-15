@@ -1005,8 +1005,8 @@ function checkout() {
     // 使用Facebook Messenger URL scheme（如果在手機上）
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     const facebookUrl = isMobile 
-        ? 'https://www.facebook.com/messages/t/332812596593087' // 手機App
-        : 'https://www.facebook.com/messages/t/332812596593087'; // 網頁版Messenger
+        ? 'https://www.facebook.com/profile.php?id=61563995139034' // 手機App
+        : 'https://www.facebook.com/profile.php?id=61563995139034'; // 網頁版Messenger
     
     // 複製訂單到剪貼板
     if (navigator.clipboard) {
