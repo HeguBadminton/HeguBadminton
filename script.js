@@ -1016,7 +1016,7 @@ function checkout() {
                 
                 // 刷新頁面
           
-                    location.reload();
+                   
                 
         }).catch(() => {
             // 複製失敗也跳轉
@@ -1026,7 +1026,7 @@ function checkout() {
                 
         // 刷新頁面
   
-            location.reload();
+            
         });
     } else {
         // 不支援剪貼板直接跳轉
@@ -1036,7 +1036,7 @@ function checkout() {
                 
        // 刷新頁面
  
-           location.reload();
+          
     }
 }
 
